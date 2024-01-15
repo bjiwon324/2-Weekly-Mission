@@ -48,6 +48,10 @@ const Img = styled.img`
   left: 1rem;
 `;
 
+const Button = styled(PrimeryButton)`
+  position: absolute;
+`;
+
 interface Props extends FormHTMLAttributes<HTMLFormElement> {
   inputValue: string;
   handleValue: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -76,10 +80,9 @@ export default function HeaderWithInPut({
         />
         <LinkInputBox>
           <Img src="link.svg" alt="사슬 이미지" />
-          <PrimeryButton type="submit">추가하기</PrimeryButton>
+          <Button type="submit">추가하기</Button>
         </LinkInputBox>
       </Form>
-      {}
     </>
   );
 }

@@ -1,5 +1,4 @@
 import Nav from '@/Components/sharing/Nav';
-import Footer from '@/Components/sharing/Footer';
 import { ChangeEvent, useEffect, useState } from 'react';
 import SharedPageHeader from '@/Components/sharedPage/SharedPageHeader';
 import SharedPageMain from '@/Components/sharedPage/SharedPageMain';
@@ -76,14 +75,13 @@ function SharedPage({
 
   return (
     <>
-      <Nav userData={user} />
+      <Nav isShared={true} userData={user} />
       <SharedPageHeader userInfo={userInfo} />
       <SharedPageMain
         search={search}
         handleSearch={handleSearch}
         cardData={cardData}
       />
-      <Footer />
     </>
   );
 }

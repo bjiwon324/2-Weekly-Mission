@@ -1,14 +1,3 @@
-.nav {
-  background-color: var(--linkbrary-bg);
-  position: sticky;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  z-index: 1;
-}
-
 .navBar {
   display: flex;
   justify-content: space-between;

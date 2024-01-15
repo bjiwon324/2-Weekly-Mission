@@ -1,27 +1,44 @@
 import S from '@/styles/Nav.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import styled from 'styled-components';
 
 const handleLoginClick = () => location.assign('signin.html');
 
 interface Prop {
-  userData: { email: string; profileImageSource: string };
+  userData?: { email?: string; profileImageSource?: string };
+  isShared?: boolean;
 }
+
+const NavStyled = styled.nav<{ isShared?: boolean }>`
+  background-color: var(--linkbrary-bg);
+  position: ${({ isShared }) => (isShared ? 'sticky' : 'static')};
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: 1;
+`;
 
 const User = ({ userData }: Prop) => {
   return (
     <article className={S.profile}>
       <div className={S.profileImg}>
-        <Image src={userData?.profileImageSource} alt="프로필 이미지" fill />
+        <Image
+          src={userData?.profileImageSource || '!img.svg'}
+          alt="프로필 이미지"
+          fill
+        />
       </div>
-      <p>{userData.email}</p>
+      <p>{userData?.email}</p>
     </article>
   );
 };
 
-export default function Nav({ userData }: Prop) {
+export default function Nav({ userData, isShared = false }: Prop) {
   return (
-    <nav className={S.nav}>
+    <NavStyled isShared={isShared}>
       <div className={S.navBar}>
         <Link id="logo" className={S.logo} href="/">
           <Image fill src="logo.svg" alt="LinkBrary logo" />
@@ -34,6 +51,6 @@ export default function Nav({ userData }: Prop) {
           </button>
         )}
       </div>
-    </nav>
+    </NavStyled>
   );
 }

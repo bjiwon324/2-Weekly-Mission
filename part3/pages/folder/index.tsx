@@ -1,7 +1,6 @@
 import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Nav from '@/Components/sharing/Nav';
-import Footer from '@/Components/sharing/Footer';
 import HeaderWithInPut from '@/Components/folderPage/HeaderWithInput';
 import FolderPageMain from '@/Components/folderPage/FolderPageMain';
 import EditModal from '@/Components/sharing/Modals/EditModal';
@@ -145,7 +144,6 @@ export default function FolderPage({
         buttons={btnData}
         cardData={cardData}
       />
-      <Footer />
       {isModal === 'addLink' && <AddFolderModal handleModal={handleModal} />}
       {isModal === 'goshare' && (
         <ShareModal

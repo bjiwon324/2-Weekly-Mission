@@ -59,6 +59,18 @@ const nextConfig = {
         port: '',
         pathname: '/static/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'testing-library.com',
+        port: '',
+        pathname: '/img/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.cdninstagram.com',
+        port: '',
+        pathname: '/rsrc.php/**',
+      },
     ],
   },
 };

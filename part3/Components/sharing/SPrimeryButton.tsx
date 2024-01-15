@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const PrimeryButton = styled.button`
-  position: absolute;
   text-align: center;
   border: none;
   padding: 0.75rem 1rem;
