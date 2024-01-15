@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+}
+
+:root {
+  --linkbrary-primary-color: #6d6afe;
+  --linkbrary-white: #fff;
+
+  --gray-light-gray-100: #333236;
+  --linkbrary-gray-10: #e7effb;
+  --linkbrary-gray-20: #ccd5e3;
+  --Linkbrary-gray60: #9fa6b2;
+  --linkbrary-bg: #f0f6ff;
+  --Linkbrary-red: #ff5b56;
+  --gra-purpleblue-to-skyblue: linear-gradient(
+    91deg,
+    #6d6afe 0.12%,
+    #6ae3fe 101.84%
+  );
+}
+
+body {
+  text-overflow: ellipsis;
+  font-family: 'Pretendard GOV Variable';
+}
+
+img {
+  margin: 0;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+main {
+  padding: 2.5rem 13.2vw;
+}
+
+@media (max-width: 1124px) {
+  main {
+    padding: 2.5rem 2rem;
+  }
+}

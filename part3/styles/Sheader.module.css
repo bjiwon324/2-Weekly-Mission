@@ -1,0 +1,26 @@
+.memHeader {
+  background-color: var(--linkbrary-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 3.75rem;
+}
+
+.headerImg {
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.siteName {
+  position: relative;
+  right: 1.4rem;
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.userName {
+  margin: 0.75rem;
+}

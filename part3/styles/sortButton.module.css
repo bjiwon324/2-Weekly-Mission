@@ -1,0 +1,51 @@
+.buttonLine {
+  display: flex;
+  padding: 0;
+  margin: 1.5rem 0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.list {
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.listUpButton {
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  border: 1px solid var(--linkbrary-primary-color, #6d6afe);
+  background: #fff;
+  margin: 0;
+  cursor: pointer;
+}
+
+.addButton {
+  cursor: pointer;
+}
+
+.listUpButton:hover {
+  outline: 1px solid var(--linkbrary-primary-color, #6d6afe);
+  background: var(--linkbrary-gray-10, #e7effb);
+  color: black;
+}
+
+.clickButton {
+  background: var(--linkbrary-primary-color);
+  color: var(--linkbrary-white);
+}
+
+.littleTitle {
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .addButton {
+    display: none;
+  }
+}
