@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sigup</title>
+    <link rel="stylesheet" href="css/signin.css" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-gov-dynamic-subset.css" />
+    <script defer src="./JS/sigup/index.js" type="module" ></script>
+    <script defer src="./JS/sig_all/utils/sig_all_func.js" type="module" ></script>
+    
+  </head>
+  <body>
+    <div class="signin_box">
+    <header>
+      <a id="logo" href="/">
+        <img src="img/logo.svg"alt="LinkBrary logo, 홈페이지로 가기" width="212" height="38">
+      </a> 
+
+      <p class="question">
+        이미 회원이신가요?
+        <span ><a class="change_link" href="/signin.html">로그인 하기</a></span>
+      </p>
+    </header>
+
+    <main>
+      <form id="join" >
+
+        <label for="email">이메일</label><br>
+        <input class="insert" id="email" name="email" placeholder="codeit@codeit.com" type="email"><br>
+
+        <label for="password">비밀번호</label><br>
+        <img class="eye eye1" src="img/eye-off.png" alt="비밀번호 보이게 하기">
+        <input class="insert" class="password" id="password" name="password" placeholder="linkbrary2023" type="password">
+        <br>
+
+        <label for="password_check">비밀번호 확인</label><br>
+        <img class="eye eye2" src="img/eye-off.png" alt="비밀번호 확인 보이게 하기" >
+        <input class="insert" class="password" id="password_check" name="password" placeholder="linkbrary20245" type="password">
+        <br>
+
+        <button class="btn">회원가입</button>
+      </form>
+    </main>
+
+    <foote class="sns_login_box">
+      <p>다른 방식으로 가입하기</p>
+      
+      <section class="sns_login">
+        <a href="https://www.google.com/"><img class="sns" src="img/google.png" alt="구글 계정으로 가입하기"></a>
+        <a href="https://www.kakaocorp.com/page/"><img class="sns" src="img/kakao.png" alt="카카오톡 계정으로 가입하기"></a>
+      </section>  
+    </footer>
+   </div>
+  </body>
+</html>
