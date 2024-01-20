@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.svg"></link>
         <title>linkbrary</title>
       </Head>
-      <Nav></Nav>
+      <Nav isShared={false} />
       <Component {...pageProps} />
       <Footer />
     </>

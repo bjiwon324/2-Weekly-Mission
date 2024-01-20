@@ -26,7 +26,8 @@ const FormBox = styled.article`
 
 const Form = styled.form`
   text-align: left;
-  gap: 0.625rem;
+
+  margin: 1rem 0;
 `;
 
 const P = styled.p`
@@ -40,7 +41,7 @@ const Label = styled.label`
   font-size: 0.875rem;
   font-weight: 400;
   text-align: left;
-  margin-bottom: -0.75rem;
+  margin-bottom: -1.5rem;
 `;
 
 const Button = styled(PrimeryButton)`
@@ -49,6 +50,7 @@ const Button = styled(PrimeryButton)`
   padding: 1rem 1.25rem;
   justify-content: center;
   align-items: center;
+  margin-top: 3rem;
 
   color: var(--Grey-Light, #f5f5f5);
   font-size: 1.125rem;
