@@ -1,5 +1,4 @@
 import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import Nav from '@/Components/sharing/Nav';
 import HeaderWithInPut from '@/Components/folderPage/HeaderWithInput';
 import FolderPageMain from '@/Components/folderPage/FolderPageMain';
@@ -8,11 +7,7 @@ import AddFolderModal from '@/Components/sharing/Modals/AddFolderModal';
 import DeleteFoderModal from '@/Components/sharing/Modals/DeleteFolderModal';
 import ShareModal from '@/Components/sharing/Modals/ShareModal';
 import AddLinkModal from '@/Components/sharing/Modals/AddLinkModal';
-import { forUser1, TasteUser1, getUserList } from '../api/api';
-
-const ForFolderNav = styled(Nav)`
-  position: static;
-`;
+import axios from '@/pages/api/axios';
 
 interface Btn {
   id: number;
@@ -35,16 +30,20 @@ interface User {
   profileImageSource: string;
 }
 
-export async function getServerSideProps() {
-  const { data } = await forUser1();
-  const [{ image_source: profileImageSource, email }] =
-    data.map((item: object) => (item ? item : '')) ?? [];
+export async function getServerSideProps(id: number) {
+  id = 1;
 
-  const user = { profileImageSource, email };
+  const resMyData = await axios.get(`users`);
+  const data = resMyData.data.data;
+  const [{ image_source, email }] = data.map((item: object) => (item ? item : '')) ?? [];
 
-  const { data: cards } = await getUserList();
+  const user = { image_source, email };
+  const resCardData = await axios.get(`links`);
+  const cards = resCardData.data.data;
 
-  const { data: btnData } = await TasteUser1();
+  const resBtnData = await axios.get(`folders`);
+
+  const btnData = resBtnData.data.data;
 
   return {
     props: {
@@ -55,15 +54,7 @@ export async function getServerSideProps() {
   };
 }
 
-export default function FolderPage({
-  user,
-  cards,
-  btnData,
-}: {
-  user: User;
-  cards: Card[];
-  btnData: Btn[];
-}) {
+export default function FolderPage({ user, cards, btnData }: { user: User; cards: Card[]; btnData: Btn[] }) {
   const [inputValue, setInputValue] = useState('');
   const [search, setSearch] = useState('');
   const [isModal, setIsModal] = useState<number | string | null>(null);
@@ -76,14 +67,10 @@ export default function FolderPage({
   };
 
   const makeSearchList = () => {
-    const isInclude = (data: string, key = search) =>
-      data?.toLowerCase().includes(key?.toLowerCase());
+    const isInclude = (data: string, key = search) => data?.toLowerCase().includes(key?.toLowerCase());
 
     const filteredSearch = cards?.filter(
-      (card: Card) =>
-        isInclude(card.title) ||
-        isInclude(card.url) ||
-        isInclude(card.description)
+      (card: Card) => isInclude(card.title) || isInclude(card.url) || isInclude(card.description)
     );
 
     setCardData(filteredSearch);
@@ -109,11 +96,8 @@ export default function FolderPage({
   };
 
   const yourPick = async (id: number, name: string) => {
-    const { data } = await getUserList(id);
-
-    const filteredCards = data.filter(
-      ({ folder_id }: { folder_id: number }) => folder_id === id
-    );
+    const resData = await axios.get(`users/${id}/links?folderId=${id}`);
+    const filteredCards = resData.data.data.filter(({ folder_id }: { folder_id: number }) => folder_id === id);
     setCardData(filteredCards);
     setLittleTitle(name);
   };
@@ -125,12 +109,8 @@ export default function FolderPage({
 
   return (
     <>
-      <ForFolderNav userData={user} />
-      <HeaderWithInPut
-        inputValue={inputValue}
-        handleValue={handleValue}
-        handleModal={handleModal}
-      />
+      <Nav userData={user} />
+      <HeaderWithInPut inputValue={inputValue} handleValue={handleValue} handleModal={handleModal} />
 
       <FolderPageMain
         setSearch={setSearch}
@@ -145,23 +125,10 @@ export default function FolderPage({
         cardData={cardData}
       />
       {isModal === 'addLink' && <AddFolderModal handleModal={handleModal} />}
-      {isModal === 'goshare' && (
-        <ShareModal
-          name={littleTitle ? littleTitle : ''}
-          handleModal={handleModal}
-        />
-      )}
+      {isModal === 'goshare' && <ShareModal name={littleTitle ? littleTitle : ''} handleModal={handleModal} />}
       {isModal === 'changeName' && <EditModal handleModal={handleModal} />}
-      {isModal === 'deleteFolder' && (
-        <DeleteFoderModal name={littleTitle} handleModal={handleModal} />
-      )}
-      {isModal === 'addLinkBtn' && (
-        <AddLinkModal
-          url={inputValue}
-          buttons={btnData}
-          handleModal={handleModal}
-        />
-      )}
+      {isModal === 'deleteFolder' && <DeleteFoderModal name={littleTitle} handleModal={handleModal} />}
+      {isModal === 'addLinkBtn' && <AddLinkModal url={inputValue} buttons={btnData} handleModal={handleModal} />}
     </>
   );
 }

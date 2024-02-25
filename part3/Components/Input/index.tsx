@@ -1,6 +1,6 @@
 import { Label } from '@/pages/Auth/signin/styled';
 import Image from 'next/image';
-import { useState } from 'react';
+import { FocusEventHandler, useState } from 'react';
 import { RegisterOptions } from 'react-hook-form';
 
 import styled from 'styled-components';
@@ -58,11 +58,10 @@ interface Props {
   register: any;
   RegisterOptions: RegisterOptions<FormInput>;
   error: any;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
 }
 
-//email | text | password
-
-export default function Input({ label, labelName, type, placeholder, register, RegisterOptions, error }: Props) {
+export default function Input({ label, labelName, type, placeholder, register, RegisterOptions, error, onBlur }: Props) {
   const [inputType, setInputType] = useState(type);
 
   const handlePasswordType = () => {
@@ -75,17 +74,16 @@ export default function Input({ label, labelName, type, placeholder, register, R
     <InputBox>
       <Label htmlFor={labelName}>{label}</Label>
       <InputStyled
+        onBlur={onBlur}
         type={inputType}
         id={labelName}
         placeholder={placeholder}
         {...register(labelName, { ...RegisterOptions })}
-        className={error[labelName] && 'error'}
+        className={error?.message ? 'error' : ''}
       />
-      <ErrorText>{error && error[labelName]?.message}</ErrorText>
-
-      {type === 'password' ? (
-        <Image className="eye" width={16} height={16} src={eyeImg} alt="비밀번호 보기" onClick={handlePasswordType} />
-      ) : null}
+      <ErrorText>{error?.message}</ErrorText>
+    
+      {type === 'password' ? <Image className="eye" width={16} height={16} src={eyeImg} alt="비밀번호 보기" onClick={handlePasswordType} /> : null}
     </InputBox>
   );
 }

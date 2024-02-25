@@ -39,8 +39,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 1.75rem;
-  height: 1.75rem;
   border-radius: 999px;
   overflow: hidden;
 }

@@ -2,7 +2,7 @@ import Nav from '@/Components/sharing/Nav';
 import { ChangeEvent, useEffect, useState } from 'react';
 import SharedPageHeader from '@/Components/sharedPage/SharedPageHeader';
 import SharedPageMain from '@/Components/sharedPage/SharedPageMain';
-import { getUserData, getUserPick } from '@/pages/api/api';
+import axios from '@/pages/api/axios';
 
 interface Card {
   createdAt: string | number;
@@ -23,13 +23,15 @@ interface UserInfo {
   owner: { profileImageSource: ''; name: '' };
 }
 
-export async function getServerSideProps() {
-  const { email, profileImageSource } = await getUserData();
-  const user = { email, profileImageSource };
+export async function getServerSideProps(id: number) {
+  id = 1;
+  const user = await axios.get(`users`);
+  // const user = { email, profileImageSource };
 
-  const { folder } = await getUserPick();
-  const { name, owner, links: cards } = folder;
-  const userInfo = { name, owner };
+  const userInfo = await axios.get(`folders`);
+  const cards = null;
+  //const { name, owner, links: cards } = folder;
+  // const userInfo = { name, owner };
 
   return {
     props: {
@@ -40,15 +42,10 @@ export async function getServerSideProps() {
   };
 }
 
-function SharedPage({
-  user,
-  userInfo,
-  cards,
-}: {
-  user: User;
-  userInfo: UserInfo;
-  cards: Card[];
-}) {
+function SharedPage({ user, userInfo, cards }: { user: any; userInfo: any; cards: any }) {
+  console.log('mydata', user);
+  console.log(userInfo);
+
   const [cardData, setCardData] = useState(cards);
   const [search, setSearch] = useState('');
 
@@ -57,14 +54,10 @@ function SharedPage({
   };
 
   const makeSearchList = () => {
-    const isInclude = (data: string, key = search) =>
-      data?.toLowerCase().includes(key?.toLowerCase());
+    const isInclude = (data: string, key = search) => data?.toLowerCase().includes(key?.toLowerCase());
 
     const filteredSearch = cardData?.filter(
-      (card: Card) =>
-        isInclude(card.title) ||
-        isInclude(card.url) ||
-        isInclude(card.description)
+      (card: Card) => isInclude(card.title) || isInclude(card.url) || isInclude(card.description)
     );
     setCardData(filteredSearch);
   };
@@ -77,11 +70,7 @@ function SharedPage({
     <>
       <Nav isShared={true} userData={user} />
       <SharedPageHeader userInfo={userInfo} />
-      <SharedPageMain
-        search={search}
-        handleSearch={handleSearch}
-        cardData={cardData}
-      />
+      <SharedPageMain search={search} handleSearch={handleSearch} cardData={cardData} />
     </>
   );
 }

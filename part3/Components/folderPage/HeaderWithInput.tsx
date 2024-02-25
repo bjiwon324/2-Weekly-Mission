@@ -58,12 +58,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement> {
   handleModal: (e: MouseEvent<HTMLElement>) => void;
 }
 
-export default function HeaderWithInPut({
-  inputValue,
-  handleValue,
-  handleModal,
-  className,
-}: Props) {
+export default function HeaderWithInPut({ inputValue, handleValue, handleModal, className }: Props) {
   const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(inputValue);
@@ -73,13 +68,9 @@ export default function HeaderWithInPut({
   return (
     <>
       <Form className={className} onSubmit={handleSubmit}>
-        <Input
-          placeholder="링크를 입력하세요"
-          value={inputValue}
-          onChange={(e) => handleValue(e)}
-        />
+        <Input placeholder="링크를 입력하세요" value={inputValue} onChange={(e) => handleValue(e)} />
         <LinkInputBox>
-          <Img src="link.svg" alt="사슬 이미지" />
+          <Img src="/link.svg" alt="사슬 이미지" />
           <Button type="submit">추가하기</Button>
         </LinkInputBox>
       </Form>

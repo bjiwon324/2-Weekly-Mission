@@ -5,8 +5,12 @@ export default function Home() {
   return (
     <>
       <Link href="/shared">shared</Link>
+      <br />
       <Link href="/folder">folder</Link>
-      <Link href="/signin">signin</Link>
+      <br />
+      <Link href="/Auth/signin">signin</Link>
+      <br />
+      <Link href="/Auth/signup">signup</Link>
     </>
   );
 }

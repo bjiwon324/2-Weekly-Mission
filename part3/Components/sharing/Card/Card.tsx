@@ -51,43 +51,22 @@ export default function Card({
   handleSelect,
   handleKebab,
 }: Props) {
-  const {
-    created_at,
-    createdAt,
-    description,
-    image_source,
-    imageSource,
-    title,
-    url,
-    id,
-  } = card;
+  const { created_at, createdAt, description, image_source, imageSource, title, url, id } = card;
 
-  const displayCreatedAt: number | string = (
-    createdAt !== undefined ? createdAt : created_at
-  ) as number | string;
+  const displayCreatedAt: number | string = (createdAt !== undefined ? createdAt : created_at) as number | string;
 
   return (
     <>
       <div className={S.card}>
         <a href={url} className={S.cardImgBox}>
-          <Image
-            fill
-            className={S.cardImg}
-            src={imageSource || image_source || '!img.svg'}
-            alt={title}
-          />
+          <Image fill className={S.cardImg} src={imageSource || image_source || '/!img.svg'} alt={title} />
         </a>
-        <Star
-          className={S.star}
-          onClick={() => handleSelect(id)}
-          id={id}
-          isSelected={isSelected}
-        />
+        <Star className={S.star} onClick={() => handleSelect(id)} id={id} isSelected={isSelected} />
         <Image
           width="21"
           height="17"
           className={S.kebab}
-          src="kebab.svg"
+          src="/kebab.svg"
           alt="기능 버튼"
           onClick={() => handleKebab(id)}
         />
@@ -99,12 +78,8 @@ export default function Card({
           <p className={S.makeDate}>{formatDate(displayCreatedAt)}</p>
         </a>
       </div>
-      {isModal === `${id}delete` && (
-        <DeleteLinkModal url={url} handleModal={handleModal} />
-      )}
-      {isModal === `${id}add` && (
-        <AddLinkModal buttons={buttons} handleModal={handleModal} url={url} />
-      )}
+      {isModal === `${id}delete` && <DeleteLinkModal url={url} handleModal={handleModal} />}
+      {isModal === `${id}add` && <AddLinkModal buttons={buttons} handleModal={handleModal} url={url} />}
     </>
   );
 }

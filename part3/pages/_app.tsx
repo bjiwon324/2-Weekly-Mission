@@ -1,5 +1,6 @@
 import Footer from '@/Components/sharing/Footer';
 import Nav from '@/Components/sharing/Nav';
+import { AuthProvider, useAuth } from '@/context/AuthProvider';
 import '@/styles/globals.css';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -11,9 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.svg"></link>
         <title>linkbrary</title>
       </Head>
-      <Nav isShared={false} />
-      <Component {...pageProps} />
-      <Footer />
+      <AuthProvider>
+        <Nav isShared={false} />
+        <Component {...pageProps} />
+        <Footer />
+      </AuthProvider>
     </>
   );
 }

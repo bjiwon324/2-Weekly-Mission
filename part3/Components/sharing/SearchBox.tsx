@@ -49,19 +49,9 @@ interface Props {
 export default function SearchBox({ handleSearch, search, setSearch }: Props) {
   return (
     <Form>
-      <Img src={search ? 'searched.png' : 'Search.svg'} alt="돋보기 사진" />
-      <Img
-        src="modalclose.png"
-        className="delete"
-        alt="검색창 지우기"
-        onClick={() => setSearch('')}
-      />
-      <Input
-        placeholder="링크를 검색해보세요"
-        type="text"
-        value={search}
-        onChange={handleSearch}
-      />
+      <Img src={search ? '/searched.png' : '/Search.svg'} alt="돋보기 사진" />
+      <Img src="/modalclose.png" className="delete" alt="검색창 지우기" onClick={() => setSearch('')} />
+      <Input placeholder="링크를 검색해보세요" type="text" value={search} onChange={handleSearch} />
     </Form>
   );
 }
